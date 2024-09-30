@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "Contact Page";
+}
+
+<h1>Contact Us</h1>
+<p>You can reach out to us via email.</p>
+}
+
+<h2>Contact Us</h2>
+
+<form asp-action="Contact" method="post">
+    <div>
+        <label for="name">Your Name</label>
+        <input type="text" id="name" name="Name" required />
+    </div>
+    <div>
+        <label for="email">Your Email</label>
+        <input type="email" id="email" name="Email" required />
+    </div>
+    <div>
+        <label for="subject">Subject</label>
+        <input type="text" id="subject" name="Subject" required />
+    </div>
+    <div>
+        <label for="message">Message</label>
+        <textarea id="message" name="Message" rows="5" required></textarea>
+    </div>
+    <button type="submit">Send Message</button>
+</form>
+
+@if (ViewData["MessageSent"] != null)
+{
+    <p style="color:green">@ViewData["MessageSent"]</p>
+}
