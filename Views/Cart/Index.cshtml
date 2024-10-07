@@ -1,0 +1,36 @@
+@model List<RazorWebsite.Models.CartItem>
+
+@{
+    ViewData["Title"] = "Shopping Cart";  
+} 
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@(item.Product != null ? item.Product.Name : "Unknown Product")</td> <!-- Null check -->
+                    <td>@item.Quantity</td>
+                    <td>@item.TotalPrice.ToString("Ksh #,0")</td>
+                    <td>
+                        <form asp-controller="Store" asp-action="RemoveFromCart" method="post">
+                            <input type="hidden" name="id" value="@item.ProductId" />
+                            <button type="submit" class="btn btn-danger">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    
+
+    <form asp-action="Checkout" method="post">
+        <button type="submit" class="btn btn-success">Checkout</button>
+    </form>
+}

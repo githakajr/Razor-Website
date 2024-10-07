@@ -14,6 +14,22 @@
             <a class="navbar-brand" asp-controller="Account" asp-action="Login">Login</a>
             <a class="navbar-brand" asp-controller="Home" asp-action="About">About</a>
             <a class="navbar-brand" asp-controller="Home" asp-action="Contact">Contact</a>
+
+            <!-- Store Link -->
+            <a class="navbar-brand" asp-controller="Store" asp-action="Index">Store</a>
+
+            <!-- Cart Image Link -->
+            <a href="@Url.Action("Index", "Cart")" class="navbar-brand">
+                <img src="~/images/cart.png" alt="Cart" style="width: 30px; height: 30px;" />
+            </a>
+
+            <!-- Logout Button -->
+            @if (User.Identity != null && User.Identity.IsAuthenticated)
+            {
+                <form asp-controller="Account" asp-action="Logout" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-danger navbar-btn">Logout</button>
+                </form>
+            }
         </div>
     </nav>
 

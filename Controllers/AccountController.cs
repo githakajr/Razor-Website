@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Security.Claims;
 using RazorWebsite.Models;
-using RazorWebsite.Data;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 using System.Text;
@@ -80,20 +79,21 @@ namespace RazorWebsite.Controllers
                 return View(model);
             }
 
-            // Hash the password
+            // Create a password hash and salt
             using var hmac = new HMACSHA256();
             var newUser = new User
             {
                 Username = model.Username,
                 Email = model.Email,
-                PasswordHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(model.Password)))
+                PasswordHash = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(model.Password))),
+                PasswordSalt = Convert.ToBase64String(hmac.Key) // Convert salt (key) to Base64 string
             };
 
             _context.Users.Add(newUser);
 
             try
             {
-                await _context.SaveChangesAsync(); // Save to database
+                await _context.SaveChangesAsync(); // Save to the database
                 ViewBag.SuccessMessage = "Account created successfully. You can now log in.";
                 return RedirectToAction("Login");
             }
@@ -112,18 +112,30 @@ namespace RazorWebsite.Controllers
         public async Task<IActionResult> Login(string username, string password)
         {
             // Check if the provided credentials are valid
-            var user = await _context.Users
-                .FirstOrDefaultAsync(u => u.Username == username); // Get user by username
+            var user = await _context.Users.FirstOrDefaultAsync(u => u.Username == username);
 
             if (user != null)
             {
-                using var hmac = new HMACSHA256();
-                var hashedPassword = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
+                if (string.IsNullOrEmpty(user.PasswordSalt))
+        {
+            ViewBag.ErrorMessage = "Invalid user data: password salt is missing.";
+            return View();
+        }
+        // Convert the stored salt back from Base64 to byte[] and use it to hash the input password
+        var saltBytes = Convert.FromBase64String(user.PasswordSalt);
 
-                // Compare password hashes
-                if (user.PasswordHash == hashedPassword)
+        using var hmac = new HMACSHA256(saltBytes); // Use the stored salt (key)
+        var hashedPassword = Convert.ToBase64String(hmac.ComputeHash(Encoding.UTF8.GetBytes(password)));
+
+        // Compare the hashed input password with the stored password hash
+        if (user.PasswordHash == hashedPassword)
                 {
                     // Create claims for the authenticated user
+
+
+
+
+
                     var claims = new List<Claim>
                     {
                         new Claim(ClaimTypes.Name, username)

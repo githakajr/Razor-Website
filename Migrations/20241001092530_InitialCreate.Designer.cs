@@ -4,14 +4,13 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using RazorWebsite.Data;
 
 #nullable disable
 
 namespace RazorWebsite.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240926103324_InitialCreate")]
+    [Migration("20241001092530_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -41,6 +40,9 @@ namespace RazorWebsite.Migrations
                         .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("varchar(256)");
+
+                    b.Property<string>("PasswordSalt")
+                        .HasColumnType("longtext");
 
                     b.Property<string>("Username")
                         .IsRequired()

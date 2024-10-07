@@ -20,5 +20,6 @@ namespace RazorWebsite.Models
         [Required]
         [MaxLength(256)]
         public string? PasswordHash { get; set; } // Store hashed passwords
+        public string? PasswordSalt { get; internal set; }
     }
 }
