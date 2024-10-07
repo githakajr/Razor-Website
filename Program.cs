@@ -46,12 +46,22 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthentication(); // Add authentication middleware
-app.UseAuthorization(); // Add authorization middleware
-app.UseSession(); // Add session middleware
+app.UseAuthentication();
+app.UseAuthorization(); 
+app.UseSession(); 
 
 app.MapControllerRoute(
     name: "default",
     pattern:  "{controller=Account}/{action=Login}/{id?}");
+
+app.MapControllerRoute(
+    name: "checkout",
+    pattern: "checkout",
+    defaults: new { controller = "Checkout", action = "Index" });
+
+app.MapControllerRoute(
+    name: "checkout-success",
+    pattern: "checkout/success",
+    defaults: new { controller = "Checkout", action = "Success" });
 
 app.Run();

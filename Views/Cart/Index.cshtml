@@ -28,9 +28,10 @@
         </tbody>
     </table>
 
-    
+    <a class="navbar-brand" asp-controller="Cart" asp-action="Index">
+    <img src="path-to-cart-icon.png" alt="Cart" />
+</a>
+<a class="navbar-brand" asp-controller="Checkout" asp-action="Index">Checkout</a>
 
-    <form asp-action="Checkout" method="post">
-        <button type="submit" class="btn btn-success">Checkout</button>
-    </form>
+
 }

@@ -1,0 +1,60 @@
+@model CheckoutViewModel
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h2>Checkout</h2>
+
+        <!-- Display Cart Items -->
+        <h3>Your Cart</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.CartItems)
+                {
+                    <tr>
+                        <td>@item.Product?.Name</td>
+                        <td>@item.Quantity</td>
+                        <td>@item.Product?.Price</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+        <h3>Total: @Model.TotalPrice</h3>
+
+        <!-- Checkout Form -->
+        <form asp-action="Checkout" method="post">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" class="form-control" id="name" name="FullName" required>
+            </div>
+            <div class="form-group">
+                <label for="address">Shipping Address</label>
+                <input type="text" class="form-control" id="address" name="Address" required>
+            </div>
+            <div class="form-group">
+                <label for="payment">Payment Method</label>
+                <select class="form-control" id="payment" name="PaymentMethod" required>
+                    <option value="credit_card">Credit Card</option>
+                    <option value="paypal">PayPal</option>
+                    <!-- Add other payment options as needed -->
+                </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Place Order</button>
+        </form>
+    </div>
+</body>
+</html>
