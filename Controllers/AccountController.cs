@@ -33,7 +33,7 @@ namespace RazorWebsite.Controllers
         public IActionResult Register()
         {
             return View();
-        }
+        }  
 
         // POST: /Account/Register
         [HttpPost]

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj": {}
+    "C:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj": {
+    "C:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj",
+        "projectUniqueName": "C:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj",
         "projectName": "RazorWebsite",
-        "projectPath": "c:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj",
+        "projectPath": "C:\\Users\\Admin\\Website\\RazorWebsite\\RazorWebsite.csproj",
         "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Admin\\Website\\RazorWebsite\\obj\\",
+        "outputPath": "C:\\Users\\Admin\\Website\\RazorWebsite\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config"
